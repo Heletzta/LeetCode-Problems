@@ -40,7 +40,7 @@ class Solution {
         System.arraycopy(nums, 0, ans, nums.length, nums.length);
         return ans;
 
-
+        //Slow solution
         /*for (int i = 0; i < nums.length; i++) {
             ans[i] = nums[i];
             ans[i+nums.length] = nums[i];
