@@ -63,3 +63,7 @@ class Solution {
         return x;  
     }
 }
+
+/*Doing a for loop like:
+(String k : stringList) takes longer than (int i = 0; i < stringList.length; i++)
+*/
