@@ -69,12 +69,38 @@ word consists of lowercase English letters.
 
  */
 
-class Solution {
+ class Solution {
     public int minimumPushes(String word) {
-        //there are 9 - 2 + 1 = 8 different keys
+        // faster solution -- same algorithm, different data structures to make it simpler!!
+        // use an array instead of a map to get the frequency of each letter!
+        int[] freqToLetter = new int[26]; // we know it's 26 because lower case english letters only!
+        for (int i = 0; i < word.length(); i++) {
+            freqToLetter[word.charAt(i) - 'a']++;
+        }
 
+        //then you can sort by frequency!
+        Integer[] sorted = new Integer[26];
+        for (int i = 0; i < 26; i++) {
+            sorted[i] = freqToLetter[i];
+        }
+        Arrays.sort(sorted, Collections.reverseOrder());
+        
+        int min = 0;
+        for (int i = 0; i < 26; i++) {
+            if (sorted[i] == 0) {
+                break;
+            }
+            int keyPresses = (i / 8 + 1);
+            min +=  keyPresses * sorted[i];
+        }
+
+        return min;
+
+        //SLOW SOLUTION -- my original work
+        //there are 9 - 2 + 1 = 8 different keys
         // know the frequency of each character
-        Map<Character, Integer> letterToCount = new HashMap<>();
+
+        /*Map<Character, Integer> letterToCount = new HashMap<>();
         for (int i = 0; i < word.length(); i++) {
             char c = word.charAt(i);
             if (letterToCount.containsKey(c)) {
@@ -83,7 +109,6 @@ class Solution {
                 letterToCount.put(c, 1);
             }
         }
-
         // sort by frequency, from greatest to smallest
         Map<Integer, ArrayList<Character>> countToLetters = new TreeMap<>(Collections.reverseOrder());
         for (char c : letterToCount.keySet()) {
@@ -116,7 +141,7 @@ class Solution {
             }
         }
 
-        return min;
+        return min;*/
         
 
 
